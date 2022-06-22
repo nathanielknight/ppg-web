@@ -1,0 +1,3 @@
+(task "build"
+  "Use wasm-pack to compile the package."
+  (exec wasm-pack build -t web))

@@ -1,3 +1,10 @@
 (task "build"
   "Use wasm-pack to compile the package."
-  (exec wasm-pack build -t web))
+  (empty-dir pkg)
+  (exec wasm-pack build -t web)
+  (copy index.html pkg/)
+)
+
+(task "serve"
+  (exec python3 -m http.server 3033 --directory pkg)
+)

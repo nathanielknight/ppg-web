@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codename Generator</title>
+    <style>
+        body {
+            font-family: monospace;
+            font-size: 16pt;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        main {
+            max-width: 30em;
+            margin: auto;
+        }
+
+        p#passphrase {
+            height: 2em;
+        }
+
+        button {
+            padding: 0.5em;
+            font-size: 16pt;
+            font-family: Courier, monospace;
+        }
+
+        footer {
+            font-size: 10pt;
+            padding-bottom: 1em;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <p id="passphrase"></p>
+        <button id="generate">Generate Passphrase</button>
+    </main>
+
+    <footer>
+        A webtool by
+        <a href="https://nathanielknight.ca">Nat Knight</a>
+        ♘
+        <a href="https://github.com/nathanielknight/ppg-web">Source Code</a>
+    </footer>
+
+    <script type="module">
+        import init, { generate } from "./ppg_web.js";
+
+        const passphraseTarget = document.getElementById("passphrase");
+
+        function newPassphrase() {
+            passphraseTarget.innerText = generate();
+        }
+
+        async function main() {
+            await init();
+            // Wait until wasm is initialized to attach the "Generate" button's event handler.
+            const btn = document.getElementById("generate");
+            btn.onclick = newPassphrase;
+            newPassphrase();
+        }
+        main();
+    </script>
+</body>
+
+</html>
